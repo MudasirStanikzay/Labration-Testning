@@ -1,0 +1,136 @@
+import org.example.BookingRepository;
+import org.example.BookingSystem;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+public class BookingSystemTest {
+
+    private BookingRepository bookingRepository;
+    private BookingSystem bookingSystem;
+
+    @BeforeEach
+    void setUp() {
+        bookingRepository = mock(BookingRepository.class);
+        bookingSystem = new BookingSystem(bookingRepository);
+    }
+
+    @Test
+    void should_save_booking_if_date_is_free() {
+        // Arrange
+        when(bookingRepository.existsBooking("2025-05-20")).thenReturn(false);
+        when(bookingRepository.saveBooking("Kalle", "2025-05-20")).thenReturn(true);
+
+        // Act
+        boolean result = bookingSystem.book("Kalle", "2025-05-20");
+
+        // Assert
+        assertThat(result).isTrue();
+        verify(bookingRepository).saveBooking("Kalle", "2025-05-20");
+    }
+
+    @Test
+    void should_not_save_booking_if_date_is_taken() {
+        // Arrange
+        when(bookingRepository.existsBooking("2025-05-20")).thenReturn(true);
+
+        // Act
+        boolean result = bookingSystem.book("Kalle", "2025-05-20");
+
+        // Assert
+        assertThat(result).isFalse();
+        verify(bookingRepository, never()).saveBooking(anyString(), anyString());
+    }
+
+    @Test
+    void should_not_call_saveBooking_if_date_is_taken() {
+        when(bookingRepository.existsBooking("2025-05-21")).thenReturn(true);
+        bookingSystem.book("Anna", "2025-05-21");
+
+        verify(bookingRepository, never()).saveBooking(anyString(), anyString());
+    }
+
+    @Test
+    void should_call_saveBooking_if_date_is_free() {
+        when(bookingRepository.existsBooking("2025-05-22")).thenReturn(false);
+        bookingSystem.book("Erik", "2025-05-22");
+
+        verify(bookingRepository).saveBooking("Erik", "2025-05-22");
+    }
+
+    @Test
+    void should_return_true_when_booking_successful() {
+        when(bookingRepository.existsBooking("2025-05-23")).thenReturn(false);
+        when(bookingRepository.saveBooking("Lina", "2025-05-23")).thenReturn(true);
+
+        boolean result = bookingSystem.book("Lina", "2025-05-23");
+
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void should_return_false_when_booking_fails_in_repo() {
+        when(bookingRepository.existsBooking("2025-05-24")).thenReturn(false);
+        when(bookingRepository.saveBooking("Olle", "2025-05-24")).thenReturn(false);
+
+        boolean result = bookingSystem.book("Olle", "2025-05-24");
+
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void should_handle_null_customer_name() {
+        when(bookingRepository.existsBooking("2025-05-25")).thenReturn(false);
+        when(bookingRepository.saveBooking(null, "2025-05-25")).thenReturn(true);
+
+        boolean result = bookingSystem.book(null, "2025-05-25");
+
+        verify(bookingRepository).saveBooking(null, "2025-05-25");
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void should_handle_empty_customer_name() {
+        when(bookingRepository.existsBooking("2025-05-26")).thenReturn(false);
+        when(bookingRepository.saveBooking("", "2025-05-26")).thenReturn(true);
+
+        boolean result = bookingSystem.book("", "2025-05-26");
+
+        verify(bookingRepository).saveBooking("", "2025-05-26");
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void should_not_book_if_date_is_null() {
+        boolean result = bookingSystem.book("Nina", null);
+
+        verifyNoInteractions(bookingRepository);
+        assertThat(result).isFalse();
+    }
+
+    // Nytt test: Hantera felaktigt undantag vid bokning
+    @Test
+    void should_return_false_when_cancel_booking_fails_in_repo() {
+        when(bookingRepository.existsBooking("2025-05-28")).thenReturn(true);
+        when(bookingRepository.removeBooking("2025-05-28")).thenReturn(false);
+
+        boolean result = bookingSystem.cancelBooking("2025-05-28");
+
+        assertThat(result).isFalse();
+    }
+
+    // Nytt test: Hantera bokning som inte finns
+    @Test
+    void should_not_remove_booking_if_not_exists() {
+        // Arrange
+        when(bookingRepository.existsBooking("2025-05-29")).thenReturn(false);
+
+        // Act
+        boolean result = bookingSystem.cancelBooking("2025-05-29");
+
+        // Assert
+        assertThat(result).isFalse();
+        verify(bookingRepository, never()).removeBooking("2025-05-29");
+    }
+}
