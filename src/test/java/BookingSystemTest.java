@@ -60,7 +60,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_return_true_when_booking_successful() {
+    void should_return_success_when_booking_is_saved () {
         when(bookingRepository.existsBooking("2025-05-23")).thenReturn(false);
         when(bookingRepository.saveBooking("Lina", "2025-05-23")).thenReturn(true);
 
