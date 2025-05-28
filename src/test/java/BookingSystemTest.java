@@ -31,7 +31,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_not_save_booking_if_date_is_taken() {
+    void should_reject_booking_when_date_is_already_booked() {
         // Arrange
         when(bookingRepository.existsBooking("2025-05-20")).thenReturn(true);
 
