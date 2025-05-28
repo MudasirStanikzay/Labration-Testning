@@ -80,7 +80,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_handle_null_customer_name() {
+    void should_accept_null_customer_name_for_booking () {
         when(bookingRepository.existsBooking("2025-05-25")).thenReturn(false);
         when(bookingRepository.saveBooking(null, "2025-05-25")).thenReturn(true);
 
