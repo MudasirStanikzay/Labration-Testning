@@ -102,7 +102,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_not_book_if_date_is_null() {
+    void should_reject_booking_when_date_is_null () {
         boolean result = bookingSystem.book("Nina", null);
 
         verifyNoInteractions(bookingRepository);
