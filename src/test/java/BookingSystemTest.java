@@ -52,7 +52,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_call_saveBooking_if_date_is_free() {
+    void should_invoke_saveBooking_when_date_is_available () {
         when(bookingRepository.existsBooking("2025-05-22")).thenReturn(false);
         bookingSystem.book("Erik", "2025-05-22");
 
