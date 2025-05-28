@@ -111,7 +111,7 @@ public class BookingSystemTest {
 
     // Nytt test: Hantera felaktigt undantag vid bokning
     @Test
-    void should_return_false_when_cancel_booking_fails_in_repo() {
+    void should_return_failure_when_cancel_booking_fails_in_repository () {
         when(bookingRepository.existsBooking("2025-05-28")).thenReturn(true);
         when(bookingRepository.removeBooking("2025-05-28")).thenReturn(false);
 
