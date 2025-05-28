@@ -19,7 +19,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    void testRemoveItemDecreasesCartSize() {
+    void should_decrease_cart_size_when_item_is_removed () {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem("Apple", 10.0, 1);
         cart.addItem("Banana", 5.0, 2);
