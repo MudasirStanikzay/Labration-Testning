@@ -122,7 +122,7 @@ public class BookingSystemTest {
 
     // Nytt test: Hantera bokning som inte finns
     @Test
-    void should_not_remove_booking_if_not_exists() {
+    void should_not_cancel_booking_if_it_does_not_exist () {
         // Arrange
         when(bookingRepository.existsBooking("2025-05-29")).thenReturn(false);
 
