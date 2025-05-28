@@ -44,7 +44,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_not_call_saveBooking_if_date_is_taken() {
+    void should_skip_saving_when_date_is_occupied () {
         when(bookingRepository.existsBooking("2025-05-21")).thenReturn(true);
         bookingSystem.book("Anna", "2025-05-21");
 
