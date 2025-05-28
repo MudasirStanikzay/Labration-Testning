@@ -17,7 +17,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_save_booking_if_date_is_free() {
+    void should_store_booking_when_date_is_available() {
         // Arrange
         when(bookingRepository.existsBooking("2025-05-20")).thenReturn(false);
         when(bookingRepository.saveBooking("Kalle", "2025-05-20")).thenReturn(true);
