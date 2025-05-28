@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 public class ShoppingCartTest {
 
     @Test
-    void testAddItemIncreasesCartSize() {
+    void should_increase_cart_size_when_item_is_added () {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem("Apple", 10.0, 1);
 
