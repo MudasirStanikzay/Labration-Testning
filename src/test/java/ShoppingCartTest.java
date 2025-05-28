@@ -44,7 +44,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    void testAddItemUpdatesQuantityIfItemAlreadyExists() {
+    void should_update_quantity_if_item_already_exists () {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem("Apple", 10.0, 1);
         cart.addItem("Apple", 10.0, 2);
