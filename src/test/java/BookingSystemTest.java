@@ -91,7 +91,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_handle_empty_customer_name() {
+    void should_allow_empty_customer_name_for_booking () {
         when(bookingRepository.existsBooking("2025-05-26")).thenReturn(false);
         when(bookingRepository.saveBooking("", "2025-05-26")).thenReturn(true);
 
