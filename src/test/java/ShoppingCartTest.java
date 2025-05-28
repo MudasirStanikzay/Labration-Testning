@@ -33,7 +33,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    void testCalculateTotalPrice() {
+    void  should_calculate_total_price_correctly () {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem("Apple", 10.0, 1);
         cart.addItem("Banana", 5.0, 2);
