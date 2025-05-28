@@ -70,7 +70,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    void should_return_false_when_booking_fails_in_repo() {
+    void should_return_failure_when_booking_cannot_be_saved () {
         when(bookingRepository.existsBooking("2025-05-24")).thenReturn(false);
         when(bookingRepository.saveBooking("Olle", "2025-05-24")).thenReturn(false);
 
