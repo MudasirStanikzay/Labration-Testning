@@ -78,7 +78,7 @@ public class ShoppingCartTest {
             "Banana, 5.0, 2",
             "Orange, 7.5, 3"
     })
-    void testAddItemToCart(String name, double price, int quantity) {
+    void should_add_item_to_cart_with_correct_values (String name, double price, int quantity) {
         ShoppingCart cart = new ShoppingCart();
 
         cart.addItem(name, price, quantity);
