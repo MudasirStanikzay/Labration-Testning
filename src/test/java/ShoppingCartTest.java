@@ -60,7 +60,7 @@ public class ShoppingCartTest {
             "0, 1.0",    // 0% rabatt, förväntad total = original
             "100, 0.0"   // 100% rabatt, förväntad total = 0
     })
-    void testApplyDiscount(double discountPercentage, double expectedMultiplier) {
+    void should_apply_discount_correctly (double discountPercentage, double expectedMultiplier) {
         ShoppingCart cart = new ShoppingCart();
         cart.addItem("Apple", 10.0, 1);
         cart.addItem("Banana", 5.0, 2);
