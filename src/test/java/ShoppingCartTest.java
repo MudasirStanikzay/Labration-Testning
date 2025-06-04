@@ -1,8 +1,6 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.*;
 
 public class ShoppingCartTest {
@@ -108,5 +106,16 @@ public class ShoppingCartTest {
 
         assertThat(noDiscount).isEqualTo(100.0);     // 0% rabatt -> fullpris
         assertThat(fullDiscount).isEqualTo(0.0);     // 100% rabatt -> gratis
+    }
+
+    @Test
+    void should_do_nothing_when_removing_item_that_does_not_exist() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Laptop", 1000.0, 1);
+
+        cart.removeItem("NonExistentItem");
+
+        assertThat(cart.getItems()).hasSize(1);
+        assertThat(cart.getItems().get(0).getName()).isEqualTo("Laptop");
     }
 }
