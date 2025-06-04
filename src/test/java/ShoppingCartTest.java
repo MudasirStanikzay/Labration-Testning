@@ -81,4 +81,12 @@ public class ShoppingCartTest {
 
         assertThat(total).isEqualTo(0.0);
     }
+
+    @Test
+    void should_not_add_item_with_zero_quantity() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Apple", 10.0, 0);
+
+        assertThat(cart.getItems()).isEmpty();
+    }
 }
