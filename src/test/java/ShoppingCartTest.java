@@ -51,4 +51,14 @@ public class ShoppingCartTest {
         assertThat(cart.getItems().get(0).getName()).isEqualTo("Banana");
     }
 
+    @Test
+    void should_calculate_total_price_of_items_in_cart() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Apple", 10.0, 2);   // 20.0
+        cart.addItem("Banana", 5.0, 3);   // 15.0
+
+        double total = cart.calculateTotal();
+
+        assertThat(total).isEqualTo(35.0);
+    }
 }
