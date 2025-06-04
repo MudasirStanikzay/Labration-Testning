@@ -10,4 +10,9 @@ public class ShoppingCart {
     public List<Item> getItems() {
         return items;
     }
+
+    public void addItem(String name, double price, int quantity) {
+        items.add(new Item(name, price, quantity));
+    }
+
 }
