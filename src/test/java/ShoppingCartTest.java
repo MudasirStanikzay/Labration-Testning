@@ -89,4 +89,12 @@ public class ShoppingCartTest {
 
         assertThat(cart.getItems()).isEmpty();
     }
+
+    @Test
+    void should_not_add_item_with_negative_price() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Apple", -5.0, 2); // Negativt pris
+
+        assertThat(cart.getItems()).isEmpty(); // Förväntar oss att inget läggs till
+    }
 }
