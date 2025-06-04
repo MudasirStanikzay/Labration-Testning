@@ -97,4 +97,16 @@ public class ShoppingCartTest {
 
         assertThat(cart.getItems()).isEmpty(); // Förväntar oss att inget läggs till
     }
+
+    @Test
+    void should_handle_discount_boundaries_zero_and_full() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Book", 100.0, 1);
+
+        double noDiscount = cart.applyDiscount(0);
+        double fullDiscount = cart.applyDiscount(100);
+
+        assertThat(noDiscount).isEqualTo(100.0);     // 0% rabatt -> fullpris
+        assertThat(fullDiscount).isEqualTo(0.0);     // 100% rabatt -> gratis
+    }
 }
