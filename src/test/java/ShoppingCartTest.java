@@ -72,4 +72,13 @@ public class ShoppingCartTest {
 
         assertThat(discountedTotal).isEqualTo(22.5); // (20+10)*0.75 = 22.5
     }
+
+    @Test
+    void should_return_zero_when_cart_is_empty() {
+        ShoppingCart cart = new ShoppingCart();
+
+        double total = cart.calculateTotal();
+
+        assertThat(total).isEqualTo(0.0);
+    }
 }
