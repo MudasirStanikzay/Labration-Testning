@@ -13,5 +13,18 @@ public class ShoppingCartTest {
         assertThat(cart.getItems()).isEmpty();
     }
 
+    @Test
+    void should_add_item_to_cart() {
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addItem("Banana", 5.0, 2);
+
+        assertThat(cart.getItems()).hasSize(1);
+        Item item = cart.getItems().get(0);
+        assertThat(item.getName()).isEqualTo("Banana");
+        assertThat(item.getPrice()).isEqualTo(5.0);
+        assertThat(item.getQuantity()).isEqualTo(2);
+    }
+
 }
 
