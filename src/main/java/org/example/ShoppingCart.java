@@ -24,4 +24,12 @@ public class ShoppingCart {
     public void removeItem(String name) {
         items.removeIf(item -> item.getName().equals(name));
     }
+
+    public double calculateTotal() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
+    }
 }
