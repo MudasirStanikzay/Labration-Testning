@@ -12,8 +12,9 @@ public class ShoppingCart {
     }
 
     public void addItem(String name, double price, int quantity) {
-        if (quantity <= 0) {
-            return; // Lägg inte till varor med 0 eller negativ kvantitet
+        // Förhindra ogiltiga värden
+        if (quantity <= 0 || price < 0) {
+            return;
         }
 
         for (Item item : items) {
