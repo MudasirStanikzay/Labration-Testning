@@ -38,5 +38,17 @@ public class ShoppingCartTest {
         assertThat(item.getName()).isEqualTo("Banana");
         assertThat(item.getQuantity()).isEqualTo(5);
     }
-}
 
+    @Test
+    void should_remove_item_from_cart_by_name() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Apple", 10.0, 1);
+        cart.addItem("Banana", 5.0, 2);
+
+        cart.removeItem("Apple");
+
+        assertThat(cart.getItems()).hasSize(1);
+        assertThat(cart.getItems().get(0).getName()).isEqualTo("Banana");
+    }
+
+}
