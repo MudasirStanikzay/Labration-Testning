@@ -26,5 +26,17 @@ public class ShoppingCartTest {
         assertThat(item.getQuantity()).isEqualTo(2);
     }
 
+    @Test
+    void should_increase_quantity_when_adding_same_item_again() {
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addItem("Banana", 5.0, 2);
+        cart.addItem("Banana", 5.0, 3);
+
+        assertThat(cart.getItems()).hasSize(1);
+        Item item = cart.getItems().get(0);
+        assertThat(item.getName()).isEqualTo("Banana");
+        assertThat(item.getQuantity()).isEqualTo(5);
+    }
 }
 
